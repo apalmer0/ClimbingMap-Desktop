@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import { node } from 'prop-types';
+
+import Map from '../Map';
 
 class App extends Component {
-  static propTypes = {
-    children: node,
-  };
-
   render () {
-    const { children } = this.props;
-
     return (
       <div className="app">
         <h1>Maps</h1>
-        {children}
+        <Map
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNaCv8ozBsC4BF4QRzELhTT73d4KOvp0I&v=3.exp&libraries=geometry,drawing,places"
+          loadingElement={<div style={{ height: '100%' }} />}
+          containerElement={<div style={{ height: '600px' }} />}
+          isMarkerShown
+          mapElement={<div style={{ height: '100%' }} />}
+        />
       </div>
     );
   }
