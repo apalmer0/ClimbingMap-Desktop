@@ -24,6 +24,6 @@ if (process.env.NODE_ENV === 'production') {
     const host = server.address().address;
     const port = server.address().port;
 
-    console.log('Gnareact is listening at http://%s:%s', host, port);
+    console.log('Maps is listening at http://%s:%s', host, port);
   });
 }

@@ -11,7 +11,7 @@ class App extends Component {
 
     return (
       <div className="app">
-        <h1>Gnareact</h1>
+        <h1>Maps</h1>
         {children}
       </div>
     );
