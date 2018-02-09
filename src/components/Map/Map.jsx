@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { bool } from 'prop-types';
 import {
-  Circle,
   Polygon,
   DirectionsRenderer,
   GoogleMap,
@@ -38,22 +37,6 @@ class Map extends Component {
       travelMode: google.maps.TravelMode.DRIVING,
     }, (result, status) => {
       if (status === google.maps.DirectionsStatus.OK) {
-        // const polyline = result.routes[0].overview_polyline;
-        // const decoded = google.maps.geometry.encoding.decodePath(polyline);
-        // console.log('decoded', decoded);
-        // const newArr = decoded.map((pts) => {
-        //   return ({
-        //     lat: pts.lat(),
-        //     lng: pts.lng(),
-        //   });
-        // });
-        // const shortArr = [];
-        // newArr.forEach((ele, idx) => {
-        //   if (idx % 10 === 0) {
-        //     shortArr.push(ele);
-        //   }
-        // });
-        // console.log('shortArr', shortArr);
         const loc1 = {
           lat: 42.380007,
           lng: -71.1805682,
@@ -96,8 +79,27 @@ class Map extends Component {
         console.log('polygon', polygon);
         console.log('should be true', contain1);
         console.log('should be false', contain2);
+        DirectionsService.route({
+          origin: new google.maps.LatLng(crgCambridge),
+          destination: new google.maps.LatLng(crgWatertown),
+          travelMode: google.maps.TravelMode.DRIVING,
+          waypoints: [
+            {
+              location: locationAlongRoute,
+              stopover: true,
+            },
+          ]
+        }, (result, status) => {
+          if (status === google.maps.DirectionsStatus.OK) {
+            this.setState({
+              directions: result,
+            });
+          } else {
+            console.error(`error fetching directions ${result}`);
+          }
+        });
         this.setState({
-          directions: result,
+          // directions: result,
           polygon,
         });
       } else {
@@ -106,6 +108,7 @@ class Map extends Component {
     });
   }
   render () {
+    console.log('this.state.directions', this.state.directions)
     return (
       <GoogleMap
         defaultZoom={7}
@@ -122,15 +125,6 @@ class Map extends Component {
   }
 }
 
-// {this.state.shortArr && this.state.shortArr.map((ele, idx) => {
-//   return (
-//     <Circle
-//       key={idx}
-//       center={new google.maps.LatLng(ele.lat, ele.lng)}
-//       radius={400}
-//     />
-//   );
-// })}
 Map.defaultProps = {
   isMarkerShown: false,
 };
