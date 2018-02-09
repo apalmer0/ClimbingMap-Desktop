@@ -28,6 +28,7 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "history": "^4.7.2",
     "import-glob-loader": "^1.1.0",
+    "jsts": "^1.6.0",
     "lodash": "^4.17.4",
     "node-sass": "^4.5.2",
     "postcss-loader": "^1.3.3",
